@@ -1,4 +1,9 @@
 # Laravel Search Query Builder
+
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/djl997/laravel-search-query-builder.svg?style=flat-square)](https://packagist.org/packages/djl997/laravel-search-query-builder)
+[![Total Downloads](https://img.shields.io/packagist/dt/djl997/laravel-search-query-builder.svg?style=flat-square)](https://packagist.org/packages/djl997/laravel-search-query-builder)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+
 A `Illuminate\Database\Query\Builder` macro to easily search on multiple database columns.
 
 ## Requirements
