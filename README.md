@@ -81,26 +81,30 @@ User::search(['bio'], $search)
     ->get();
 ```
 
+
 ### Combine search with other queries
 As stated earlier, the `search` method is developed to extend the `Illuminate\Database\Query\Builder` and thus can be used inline with any other Builder methods such as `whereIn`, `withTrashed` or `orderBy`.
 ```php
 $search = 'Laravel is cool';
 
 User::whereIn('role', ['author', 'reviewer'])
-    ->search(['bio'], $search)
-    ->orWhereHas('posts', function($query) use ($search) {
-        $query
-            ->search(['title', 'body'])
-            ->whereNotNull('published_at');
-    })
-    ->orWhereHas('comments', function($query) use ($search) {
-        $query->search(['body']);
+    ->where(function($query) { //IMPORTANT!
+        ->search(['bio'], $search)
+        ->orWhereHas('posts', function($query) use ($search) {
+            $query
+                ->search(['title', 'body'])
+                ->whereNotNull('published_at');
+        })
+        ->orWhereHas('comments', function($query) use ($search) {
+            $query->search(['body']);
+        })
     })
     ->withTrashed()
     ->orderBy('name')
     ->get();
 ```
-This will return a ordered list of users (deleted AND non-deleted), with "Laravel is cool" in their bios, published posts or comments.
+This will return a ordered list of users with author-, or reviewer roles (deleted AND non-deleted), with "Laravel is cool" in their bios, published posts or comments, ordered by name.
+> Note that the search query is wrapped in a where query, because you most likely don't want the search to bypass the other filters. 
 
 ### Dynamic columns search
 You probably already figured it out, but still: you can of course also make the columns dynamic.
