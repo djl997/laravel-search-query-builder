@@ -110,9 +110,9 @@ This will return a ordered list of users with author-, or reviewer roles (delete
 You probably already figured it out, but still: you can of course also make the columns dynamic.
 
 ```html
-    <input type="text" name="search" value="Laravel is cool"/>
-    <input type="checkbox" name="userColumns[]" value="name"/>
-    <input type="checkbox" name="userColumns[]" value="bio"/>
+<input type="text" name="search" value="Laravel is cool"/>
+<input type="checkbox" name="userColumns[]" value="name"/>
+<input type="checkbox" name="userColumns[]" value="bio"/>
 ```
 
 ```php
