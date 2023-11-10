@@ -78,7 +78,7 @@ $search = 'Laravel is cool';
 
 User::search(['bio'], $search)
     ->orWhereHas('posts', function($query) use ($search) {
-        $query->search(['title', 'body']);
+        $query->search(['title', 'body'], $search);
     })
     ->get();
 ```
@@ -94,11 +94,11 @@ User::whereIn('role', ['author', 'reviewer'])
         ->search(['bio'], $search)
         ->orWhereHas('posts', function($query) use ($search) {
             $query
-                ->search(['title', 'body'])
+                ->search(['title', 'body'], $search)
                 ->whereNotNull('published_at');
         })
         ->orWhereHas('comments', function($query) use ($search) {
-            $query->search(['body']);
+            $query->search(['body'], $search);
         })
     })
     ->withTrashed()
