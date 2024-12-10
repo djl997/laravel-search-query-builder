@@ -25,6 +25,7 @@ class LaravelSearchQueryBuilderServiceProvider extends ServiceProvider
                         // Foreach search term and column, add a `orWhere` query
                         // Also, strip the string of unnecessary spaces at the end or beginning
                         $query->orWhere($field, 'LIKE', '%'.Str::squish($string).'%');
+                        // TODO: lower case
                     }
                 }
             });
