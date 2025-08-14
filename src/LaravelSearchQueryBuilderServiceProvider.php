@@ -25,7 +25,7 @@ class LaravelSearchQueryBuilderServiceProvider extends ServiceProvider
                     foreach($fields as $field) {
                         // Foreach search term and column, add a `orWhere` query
                         // Also, strip the string of unnecessary spaces at the end or beginning
-                        $query->orWhere(DB::raw("LOWER($field)"), 'LIKE', '%'.Str::of($string)->squish().'%');
+                        $query->orWhere(DB::raw("LOWER($field)"), 'LIKE', '%'.Str::of($string)->squish()->lower().'%');
                     }
                 }
             });
