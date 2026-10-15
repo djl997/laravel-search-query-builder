@@ -1,0 +1,27 @@
+name: tests
+
+on: [push, pull_request]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { laravel: '^9.0', testbench: '^7.0', php: '8.1' }
+          - { laravel: '^10.0', testbench: '^8.0', php: '8.2' }
+          - { laravel: '^11.0', testbench: '^9.0', php: '8.3' }
+          - { laravel: '^12.0', testbench: '^10.0', php: '8.4' }
+          - { laravel: '^13.0', testbench: '^11.0', php: '8.4' }
+    name: Laravel ${{ matrix.laravel }} / PHP ${{ matrix.php }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php: ${{ matrix.php }}
+          coverage: none
+      - run: composer require "laravel/framework:${{ matrix.laravel }}" --no-update
+      - run: composer require "orchestra/testbench-core:${{ matrix.testbench }}" --dev --no-update
+      - run: composer update --prefer-dist --no-interaction
+      - run: vendor/bin/phpunit tests

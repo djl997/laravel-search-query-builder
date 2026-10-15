@@ -1,13 +1,24 @@
 {
     "name": "djl997/laravel-search-query-builder",
     "description": "A `Illuminate\\Database\\Query\\Builder` macro to easily search on multiple database columns.",
-	"keywords": ["laravel", "builder-macro", "search", "database-search", "eloquent"],
+    "keywords": [
+        "laravel",
+        "builder-macro",
+        "search",
+        "database-search",
+        "eloquent"
+    ],
     "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Djl997\\LaravelSearchQueryBuilder\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Djl997\\LaravelSearchQueryBuilder\\Tests\\": "tests/"
         }
     },
     "authors": [
@@ -19,6 +30,13 @@
     "require": {
         "php": "^8.0",
         "laravel/framework": "^9.0|^10.0|^11.0|^12.0|^13.0"
+    },
+    "require-dev": {
+        "orchestra/testbench-core": "^7.0|^8.0|^9.0|^10.0|^11.0",
+        "phpunit/phpunit": "^9.5|^10.0|^11.0|^12.0"
+    },
+    "scripts": {
+        "test": "phpunit tests"
     },
     "extra": {
         "laravel": {
