@@ -90,16 +90,17 @@ Since the `search` method is developed to be a macro and extend the `Illuminate\
 $search = 'Laravel is cool';
 
 User::whereIn('role', ['author', 'reviewer'])
-    ->where(function($query) { //see note below
-        ->search(['bio'], $search)
-        ->orWhereHas('posts', function($query) use ($search) {
-            $query
-                ->search(['title', 'body'], $search)
-                ->whereNotNull('published_at');
-        })
-        ->orWhereHas('comments', function($query) use ($search) {
-            $query->search(['body'], $search);
-        })
+    ->where(function($query) use ($search) { //see note below
+        $query
+            ->search(['bio'], $search)
+            ->orWhereHas('posts', function($query) use ($search) {
+                $query
+                    ->search(['title', 'body'], $search)
+                    ->whereNotNull('published_at');
+            })
+            ->orWhereHas('comments', function($query) use ($search) {
+                $query->search(['body'], $search);
+            });
     })
     ->withTrashed()
     ->orderBy('name')
@@ -119,10 +120,11 @@ This is a short-sighted example of how you can also make the columns dynamic:
 
 ```php
 $search = $request->input('search');
-$columns = $request->input('userColumns');
+$columns = array_intersect((array) $request->input('userColumns'), ['name', 'bio']);
 
 User::search($columns, $search)->get();
 ```
+> **Note!** Always whitelist user-supplied column names, so users can't search on columns like `password`.
 
 
 ## Changelog
