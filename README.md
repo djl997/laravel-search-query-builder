@@ -23,7 +23,7 @@ This example is not very difficult to achieve in Laravel, but it can grow very q
 Let's see how the Laravel Search Query Builder package can improve this situation.
 
 ## Requirements
-Laravel Search Query Builder requires PHP 8+ and Laravel 9+.
+Laravel Search Query Builder requires PHP 8.2+ and Laravel 12+.
 
 ## Installation
 You can install the package via composer:
